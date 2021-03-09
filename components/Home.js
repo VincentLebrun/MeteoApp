@@ -57,7 +57,7 @@ export default class Home extends Component {
       });
   }
   componentDidMount() {
-    // this.getData();
+    this.getData();
     // this.getWeathers();
    
   }
@@ -65,7 +65,7 @@ export default class Home extends Component {
   render() {
     if (this.state.isLoading) {
     }
-    // alert(JSON.stringify(this.state.data.cities)); Voici comment j'ai trouvé comment ("Commencer à utiliser l'api ") avec un alert pour afficher la valeur
+    alert(JSON.stringify(this.state.data.cities)); 
     return (
       <SafeAreaView>
         <View style={styles.body}>

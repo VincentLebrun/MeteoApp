@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StatusBar } from "expo-status-bar";
-import { LogoTitle } from "./src/LogoTitle";
-import Home from './src/Home';
+// import { LogoTitle } from "./src/LogoTitle";
+import Home from './components/Home';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -24,7 +24,7 @@ export default class App extends Component {
         <Stack.Screen
             name="Home"
             component={Home}
-            options={{ headerTitle: () => <LogoTitle /> }}
+            // options={{ headerTitle: () => <LogoTitle /> }}
           />
 
       </Stack.Navigator>
@@ -32,3 +32,7 @@ export default class App extends Component {
     );
   }
 }
+
+   
+ 
+
