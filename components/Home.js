@@ -1,20 +1,25 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, ActivityIndicatorBase } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import { SafeAreaView } from "react-native-safe-area-context";
+import { FlatList } from "react-native-gesture-handler";
 // import Svg from "react-native-svg";
 
 export default class Home extends Component {
-  
-  state = {
-    data: [],
+  constructor(props) {
+    super(props);
 
-    isLoading: false,
-  };
+    this.state = {
+      data: [],
+      date: new Date(),
+      isLoading: true,
+      
+    };
+  }
   async getData() {
     fetch(
-      "https://api.meteo-concept.com/api/forecast/daily?token=3fe8287448ef08071efabaca2f80941a243f421b369ff39f31e0f1d5671033c3",
+      "https://api.meteo-concept.com/api/location/city?token=3fe8287448ef08071efabaca2f80941a243f421b369ff39f31e0f1d5671033c3&insee=62041",
       {
         method: "GET",
         headers: {
@@ -24,68 +29,76 @@ export default class Home extends Component {
       }
     )
       .then((response) => response.json())
-      .then((cities) => {
-        console.log(cities);
+      .then((json) => {
+        
         this.setState({
-          data: cities,
-          isLoading: true,
+          data: json,
+          isLoading: false,
         });
       });
   }
 
-  async getWeathers() {
-    fetch(
-      "https://api.meteo-concept.com/api/ephemeride/1?token=3fe8287448ef08071efabaca2f80941a243f421b369ff39f31e0f1d5671033c3&insee=62000"
-    )
-      .then((response) => response.json())
-      .then((json) => {
-        this.setState({
-          name: json,
-          insee: json,
-        });
-      });
-  }
-  async getLocation() {
-    await fetch(
-      "https://api.meteo-concept.com/api/location/cities?token=3fe8287448ef08071efabaca2f80941a243f421b369ff39f31e0f1d5671033c3"
-    )
-      .then((response) => response.json())
-      .then((json) => {
-        this.setstate({
-          cp: json,
-        });
-      });
-  }
+  // async getWeathers() {
+  //   fetch(
+  //     "https://api.meteo-concept.com/api/ephemeride/1?token=3fe8287448ef08071efabaca2f80941a243f421b369ff39f31e0f1d5671033c3&insee=62041"
+  //   )
+  //     .then((response) => response.json())
+  //     .then((json) => {
+  //       this.setState({
+  //         name: json,
+  //         insee: json,
+  //       });
+  //     });
+  // }
+  //  async getLocation() {
+  //     fetch(
+  //      "https://api.meteo-concept.com/api/location/cities?token=3fe8287448ef08071efabaca2f80941a243f421b369ff39f31e0f1d5671033c3&insee=62041"
+  //    )
+  //      .then((response) => response.json())
+  //      .then((json) => {
+  //        this.setstate({
+  //          cities: "" ,
+  //        });
+  //      });
+  //  }
   componentDidMount() {
     this.getData();
     // this.getWeathers();
-   
+    // this.getLocation()
+    // console.log(this.state.data);
   }
 
   render() {
-    if (this.state.isLoading) {
+    const { data, isLoading, date } = this.state;
+    if(isLoading) {
+      return(
+        <Text>Chargement en cours</Text>
+      )
     }
-    alert(JSON.stringify(this.state.data.cities)); 
+
     return (
       <SafeAreaView>
         <View style={styles.body}>
           <View style={styles.container}>
             <View style={styles.textHead}>
-              <Text style={styles.text}>Aure sur Mer</Text>
-              <Text style={styles.textDate}>Thursday 30 april 2020</Text>
+              <Text style={styles.text}>{data.city.name}</Text>
+              <Text style={styles.textDate}>{date.getMonth()}-{date.getFullYear()}</Text>
             </View>
             <View style={styles.text}>
               <Text style={styles.today}>Today</Text>
               <View style={styles.middle}>
-                
-                  <Ionicons name="md-rainy" size={70} color="black" />
-                  <Text style={styles.textT}>13°</Text>
-                
+                <Ionicons name="md-rainy" size={70} color="black" />
+                <Text style={styles.textT}>13°</Text>
               </View>
             </View>
             <View style={styles.textUnder}>
-              <Text>{JSON.stringify(this.state.data.city)}</Text>
-              <Text></Text>
+              <FlatList
+                data={data}
+                keyExtractor={({ city }, index) => city}
+                renderItem={({ item }) => <Text>{item.insee}</Text>}
+              />
+
+              {/* <Text>{this.state.city.name}</Text> */}
             </View>
           </View>
         </View>
