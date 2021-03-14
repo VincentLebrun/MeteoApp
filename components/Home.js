@@ -75,7 +75,6 @@ export default class Home extends Component {
         <Text>Chargement en cours</Text>
       )
     }
-
     return (
       <SafeAreaView>
         <View style={styles.body}>
