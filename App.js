@@ -25,14 +25,14 @@ export default class App extends Component {
                : 'ios-information-circle-outline';
 
              }else if (route.name === 'Search'){
-               iconName= focused? 'ios-list-box' : 'ios-list';
+               iconName= focused? 'ios-list' : 'ios-list';
              }
              return <Ionicons name={iconName} size={size} color={color}/>
            },
          })}
          tabBarOptions={{
-           activeTintColor: ' #3355ff ',
-           inactiveTintColor: ' #fdfdfd ',
+           activeTintColor: 'blue',
+           inactiveTintColor: 'green',
 
          }}
         >
