@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Text, FlatList } from "react-native";
+import { StyleSheet, View, Text, ActivityIndicatorBase } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import { SafeAreaView } from "react-native-safe-area-context";
+import { FlatList } from "react-native-gesture-handler";
 // import Svg from "react-native-svg";
 
 export default class Home extends Component {
+
 
   state = {
     data: [],
@@ -60,7 +62,7 @@ export default class Home extends Component {
   }
 
   render() {
-    const { data, isLoading, date, weather} = this.state;
+    const { data, isLoading, date, weather } = this.state;
     if (isLoading) {
       return (
         <Text>Chargement en cours</Text>
@@ -73,14 +75,13 @@ export default class Home extends Component {
           <View style={styles.container}>
             <View style={styles.textHead}>
               <Text style={styles.text}>{data.city.name}</Text>
-              <Text style={styles.textDate}>{date.getDay() }{date.getMonth()}-{date.getFullYear()}</Text>
+              <Text style={styles.textDate}>{date.getDay()}{date.getMonth()}-{date.getFullYear()}</Text>
             </View>
             <View style={styles.text}>
               <Text style={styles.today}>Today</Text>
               <View style={styles.middle}>
-
                 <Ionicons name="md-rainy" size={70} color="black" />
-                <Text style={styles.textT}>{}</Text>
+                <Text style={styles.textT}>{ }</Text>
 
               </View>
             </View>
@@ -88,12 +89,10 @@ export default class Home extends Component {
               <FlatList
                 data={data}
                 keyExtractor={({ city }, index) => city}
-                renderItem={({ item }) => (
-                  <Text>{item.insee}, {item.name}</Text>
-                )}
+                renderItem={({ item }) => <Text>{item.insee}</Text>}
               />
-              {/* <Text>{this.state.data.city.name}</Text> */}
-              <Text></Text>
+
+              {/* <Text>{this.state.city.name}</Text> */}
             </View>
           </View>
         </View>
