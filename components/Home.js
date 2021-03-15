@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Text, ActivityIndicatorBase } from "react-native";
+import { StyleSheet, View, Text} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList } from "react-native-gesture-handler";
 // import Svg from "react-native-svg";
@@ -16,7 +15,7 @@ export default class Home extends Component {
     isLoading: true,
   };
   async getData() {
-    fetch(
+    await fetch(
       "https://api.meteo-concept.com/api/location/city?token=3fe8287448ef08071efabaca2f80941a243f421b369ff39f31e0f1d5671033c3&insee=62041",
       {
         method: "GET",
@@ -31,9 +30,10 @@ export default class Home extends Component {
 
         this.setState({
           data: json,
-          isLoading: false,
         });
       });
+
+    this.getWeathers();
   }
 
   async getWeathers() {
@@ -57,12 +57,10 @@ export default class Home extends Component {
 
   componentDidMount() {
     this.getData();
-    this.getWeathers();
-
   }
 
   render() {
-    const { data, isLoading, date, weather } = this.state;
+    const { data, isLoading, date } = this.state;
     if (isLoading) {
       return (
         <Text>Chargement en cours</Text>
@@ -89,10 +87,10 @@ export default class Home extends Component {
               <FlatList
                 data={data}
                 keyExtractor={({ city }, index) => city}
-                renderItem={({ item }) => <Text>{item.insee}</Text>}
+                renderItem={({ item }) => <Text></Text>}
               />
 
-              {/* <Text>{this.state.city.name}</Text> */}
+              {/* <Text>{data.name}</Text> */}
             </View>
           </View>
         </View>

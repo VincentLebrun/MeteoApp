@@ -2,32 +2,51 @@ import React, { Component } from "react";
 import { StatusBar } from "expo-status-bar";
 // import { LogoTitle } from "./src/LogoTitle";
 import Home from "./components/Home";
+import Ionicons from 'react-native-vector-icons/Ionicons';
 // import Search from "./components/Search";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Search from "./components/Search";
 
-const Stack = createStackNavigator();
+let Tab = createBottomTabNavigator();
 export default class App extends Component {
   render() {
     return (
       <NavigationContainer>
         <StatusBar style="light" />
 
-        <Stack.Navigator
-          screenOptions={{
-            headerStyle: {
-              backgroundColor: "whitesmoke",
-            },
-            headerTintColor: "black",
-            headerTitleAlign: "center",
-          }}
+        <Tab.Navigator
+         screenOptions={({ route })=>({
+           tabBarIcon: ({focused, color, size}) =>{
+             let iconName;
+             if (route.name ==='Home') {
+               iconName=focused 
+               ? 'ios-information-circle'
+               : 'ios-information-circle-outline';
+
+             }else if (route.name === 'Search'){
+               iconName= focused? 'ios-list-box' : 'ios-list';
+             }
+             return <Ionicons name={iconName} size={size} color={color}/>
+           },
+         })}
+         tabBarOptions={{
+           activeTintColor: ' #3355ff ',
+           inactiveTintColor: ' #fdfdfd ',
+
+         }}
         >
-          <Stack.Screen
+          <Tab.Screen
             name="Home"
             component={Home}
             // options={{ headerTitle: () => <LogoTitle /> }}
           />
-        </Stack.Navigator>
+            <Tab.Screen
+            name="Search"
+            component={Search}
+            // options={{ headerTitle: () => <LogoTitle /> }}
+          />
+        </Tab.Navigator>
        
       </NavigationContainer>
     );
