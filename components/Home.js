@@ -9,6 +9,7 @@ export default class Home extends Component {
 
   state = {
     data: [],
+    weather: [],
     date: new Date(),
     isLoading: true,
   };
@@ -25,7 +26,7 @@ export default class Home extends Component {
     )
       .then((response) => response.json())
       .then((json) => {
-        
+
         this.setState({
           data: json,
           isLoading: false,
@@ -33,62 +34,53 @@ export default class Home extends Component {
       });
   }
 
-  // async getWeathers() {
-  //   fetch(
-  //     "https://api.meteo-concept.com/api/location/cities?token=3fe8287448ef08071efabaca2f80941a243f421b369ff39f31e0f1d5671033c3&insee=62000",{
-  //     method: 'POST',
-  //     headers: {
-  //       Accept: 'application/json',
-  //       'Content-Type': 'application/json'
+  async getWeathers() {
+    fetch("https://api.meteo-concept.com/api/forecast/daily?token=3fe8287448ef08071efabaca2f80941a243f421b369ff39f31e0f1d5671033c3&insee=62041"
+      , {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
 
-  //   })
-  //     .then((response) => response.json())
-  //     .then((json) => {
-  //       this.setState({
-  //         name: json,
-  //         insee: json,
-  //       });
-  //     });
-  // }
-  // async getLocation() {
-  //   await fetch(
-  //     "https://api.meteo-concept.com/api/location/cities?token=3fe8287448ef08071efabaca2f80941a243f421b369ff39f31e0f1d5671033c3&insee=62000"
-  //   )
-  //     .then((response) => response.json())
-  //     .then((json) => {
-  //       this.setstate({
-  //         cp: json,
-  //       });
-  //     });
-  // }
+      })
+      .then((response) => response.json())
+      .then((json) => {
+        this.setState({
+          weather: json,
+          isLoading: false
+        });
+      });
+  }
+
   componentDidMount() {
     this.getData();
-    // this.getWeathers();
+    this.getWeathers();
 
   }
 
   render() {
-    const { data, isLoading, date } = this.state;
+    const { data, isLoading, date, weather} = this.state;
     if (isLoading) {
-      return(
+      return (
         <Text>Chargement en cours</Text>
       )
     }
-    
+
     return (
       <SafeAreaView>
         <View style={styles.body}>
           <View style={styles.container}>
             <View style={styles.textHead}>
               <Text style={styles.text}>{data.city.name}</Text>
-              <Text style={styles.textDate}>{date.getMonth()}-{date.getFullYear()}</Text>
+              <Text style={styles.textDate}>{date.getDay() }{date.getMonth()}-{date.getFullYear()}</Text>
             </View>
             <View style={styles.text}>
               <Text style={styles.today}>Today</Text>
               <View style={styles.middle}>
 
                 <Ionicons name="md-rainy" size={70} color="black" />
-                <Text style={styles.textT}>13°</Text>
+                <Text style={styles.textT}>{}</Text>
 
               </View>
             </View>
