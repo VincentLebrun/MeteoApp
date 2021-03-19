@@ -90,7 +90,7 @@ export default class Home extends Component {
                 renderItem={({ item }) => <Text></Text>}
               />
 
-              {/* <Text>{data.name}</Text> */}
+              <Text>{data.city.name}</Text>
             </View>
           </View>
         </View>

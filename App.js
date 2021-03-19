@@ -21,11 +21,11 @@ export default class App extends Component {
              let iconName;
              if (route.name ==='Home') {
                iconName=focused 
-               ? 'ios-information-circle'
-               : 'ios-information-circle-outline';
+               ? 'home'
+               : 'home';
 
              }else if (route.name === 'Search'){
-               iconName= focused? 'ios-list' : 'ios-list';
+               iconName= focused? 'search' : 'search';
              }
              return <Ionicons name={iconName} size={size} color={color}/>
            },
