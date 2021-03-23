@@ -25,7 +25,7 @@ export default class App extends Component {
                : 'ios-information-circle-outline';
 
              }else if (route.name === 'Search'){
-               iconName= focused? 'ios-list' : 'ios-list';
+               iconName= focused? 'search-circle-outline' : 'search-circle';
              }
              return <Ionicons name={iconName} size={size} color={color}/>
            },
@@ -39,12 +39,12 @@ export default class App extends Component {
           <Tab.Screen
             name="Home"
             component={Home}
-            // options={{ headerTitle: () => <LogoTitle /> }}
+            
           />
             <Tab.Screen
             name="Search"
             component={Search}
-            // options={{ headerTitle: () => <LogoTitle /> }}
+          
           />
         </Tab.Navigator>
        

@@ -73,14 +73,13 @@ export default class Home extends Component {
           <View style={styles.container}>
             <View style={styles.textHead}>
               <Text style={styles.text}>{data.city.name}</Text>
-              <Text style={styles.textDate}>{date.getDay()}{date.getMonth()}-{date.getFullYear()}</Text>
+              <Text style={styles.textDate}>{date.getDate()}{date.getMonth()}-{date.getFullYear()}</Text>
             </View>
             <View style={styles.text}>
               <Text style={styles.today}>Today</Text>
               <View style={styles.middle}>
                 <Ionicons name="md-rainy" size={70} color="black" />
-                <Text style={styles.textT}>{ }</Text>
-
+                <Text style={styles.textT}>{}</Text>
               </View>
             </View>
             <View style={styles.textUnder}>
