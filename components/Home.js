@@ -4,6 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList } from "react-native-gesture-handler";
 // import Svg from "react-native-svg";
+import moment from 'moment'
 
 export default class Home extends Component {
 
@@ -60,7 +61,7 @@ export default class Home extends Component {
   }
 
   render() {
-    const { data, isLoading, date } = this.state;
+    const { data, isLoading,date } = this.state;
     if (isLoading) {
       return (
         <Text>Chargement en cours</Text>

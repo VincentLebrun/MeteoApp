@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, TextInput, View } from "react-native";
-import { StackNavigator } from "react-navigation";
+// import { StackNavigator } from "react-navigation";
 export default class Search extends React.Component {
   constructor(props) {
     super(props);
@@ -22,7 +22,7 @@ export default class Search extends React.Component {
         <TextInput
           onChangeText={(text) => this.setCity(text)}
           underlineColorAndroid="transparent"
-          style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
+          style={{ height: 50, borderColor: "gray", borderWidth: 2,position: "relative" }}
           value={this.state.city}
         />
         <Button onPress={() => this.submit()} title="Rechercher" />
@@ -31,11 +31,12 @@ export default class Search extends React.Component {
   }
 }
 
-export default StackNavigator({
-  Search: {
-    screen: Search,
-  },
-  Result: {
-    screen: Search,
-  },
-});
+
+// export default StackNavigator({
+//   Search: {
+//     screen: Search,
+//   },
+//   Result: {
+//     screen: Search,
+//   },
+// });
