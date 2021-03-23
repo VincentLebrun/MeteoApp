@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Text} from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList } from "react-native-gesture-handler";
-// import Svg from "react-native-svg";
+import Icon from "../weatherIcon";
 
 export default class Home extends Component {
 
@@ -72,14 +72,15 @@ export default class Home extends Component {
         <View style={styles.body}>
           <View style={styles.container}>
             <View style={styles.textHead}>
-              <Text style={styles.text}>{data.city.name}</Text>
-              <Text style={styles.textDate}>{date.getDate()}{date.getMonth()}-{date.getFullYear()}</Text>
+              <Text style={styles.text}>Aure sur mer</Text>
+              <Text style={styles.textDate}>Thursday 30 April 2020</Text>
             </View>
             <View style={styles.text}>
               <Text style={styles.today}>Today</Text>
               <View style={styles.middle}>
-                <Ionicons name="md-rainy" size={70} color="black" />
-                <Text style={styles.textT}>{}</Text>
+                <Icon name="wi-day-sunny" size={80} color="black" />
+
+                <Text style={styles.textT}>13°</Text>
               </View>
             </View>
             <View style={styles.textUnder}>
@@ -89,8 +90,65 @@ export default class Home extends Component {
                 renderItem={({ item }) => <Text></Text>}
               />
 
-              {/* <Text>{data.name}</Text> */}
+              <Text style={styles.textRain}>Rain</Text>
             </View>
+            <View style={styles.middleHour}>
+              <View style={styles.hourDate}>
+                <Text style={styles.hourItem} >06:40</Text>
+                <Text style={styles.textWeather}>Sunrise</Text>
+              </View>
+              <View style={styles.hourDate}>
+                <Text style={styles.hourItem} >21:20</Text>
+                <Text style={styles.textWeather}>Sunset</Text>
+              </View>
+
+              <View style={styles.hourDate}>
+                <Text style={styles.hourItem} >14:40</Text>
+                <Text style={styles.textWeather}>Duration Day</Text>
+              </View>
+            </View>
+            <View style={styles.footer}>
+              <View style={styles.hourDate}>
+                <Text style={styles.textWeather}>THU</Text>
+                <Icon name="wi-day-sunny" size={40} color="black" />
+                <Text style={styles.hourFooter}>16°</Text>
+
+              </View>
+              <View style={styles.hourDate}>
+                <Text style={styles.textWeather}>FRI</Text>
+                <Icon name="wi-rain-wind" size={40} color="black" />
+                <Text style={styles.hourFooter} >26°</Text>
+
+              </View>
+
+              <View style={styles.hourDate}>
+                <Text style={styles.textWeather}>SAT</Text>
+                <Icon name="wi-day-rain-wind" size={40} color="black" />
+                <Text style={styles.hourFooter} >23°</Text>
+
+              </View><View style={styles.hourDate}>
+                <Text style={styles.textWeather}>SUN</Text>
+                <Icon name="wi-day-sprinkle" size={40} color="black" />
+                <Text style={styles.hourFooter} >22°</Text>
+
+              </View>
+              <View style={styles.hourDate}>
+                <Text style={styles.textWeather}>MON</Text>
+                <Icon name="wi-alien" size={40} color="black" />
+                <Text style={styles.hourFooter} >32°</Text>
+
+              </View>
+
+              <View style={styles.hourDate}>
+                <Text style={styles.textWeather}>TUE</Text>
+                <Icon name="wi-meteor" size={40} color="black" />
+                <Text style={styles.hourFooter} >23°</Text>
+              </View>
+
+
+            </View>
+
+
           </View>
         </View>
       </SafeAreaView>
@@ -133,10 +191,50 @@ const styles = StyleSheet.create({
     fontSize: 60,
     fontWeight: "bold",
     color: "black",
+    paddingBottom: 10
+  },
+  textRain: {
+    color: "#7A919D",
+    fontWeight: "bold",
+    fontSize: 24,
+    textAlign: "center",
+    paddingBottom: 30
   },
   textUnder: {
     fontSize: 20,
     color: "black",
     padding: 10,
   },
+  textWeather: {
+    color: "#7A919D",
+    fontSize: 18,
+    textAlign: "center",
+    fontWeight: "bold",
+  },
+  hourItem: {
+    fontSize: 30,
+    color: "black",
+    fontWeight: "bold"
+
+  },
+  middleHour: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  hourDate: {
+    justifyContent: "center",
+  },
+  footer: {
+    paddingTop: 90,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  hourFooter: {
+    fontSize: 22,
+    color: "black",
+    fontWeight: "bold",
+    paddingBottom: 60
+  }
 });
