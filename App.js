@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { StatusBar } from "expo-status-bar";
-// import { LogoTitle } from "./src/LogoTitle";
 import Home from "./components/Home";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Search from "./components/Search";
@@ -12,7 +11,7 @@ import AppLoading from 'expo-app-loading';
 
 const fetchFonts = () => {
   return Font.loadAsync({
-    'icomoon': require('./assets/fonts/icomoon.ttf')
+    'icomoon': require('./fonts/icomoon.ttf')
   });
 };
 
@@ -25,13 +24,13 @@ export default class App extends Component {
 
   render() {
 
-    if(!this.state.dataLoaded) {
+    if (!this.state.dataLoaded) {
       // Chargement de la police icomoon
       return (
         <AppLoading
-        startAsync={fetchFonts}
-        onFinish={() => this.setState({ dataLoaded: true })}
-        onError={console.warn}
+          startAsync={fetchFonts}
+          onFinish={() => this.setState({ dataLoaded: true })}
+          onError={console.warn}
         />
       )
     }
@@ -77,3 +76,4 @@ export default class App extends Component {
     );
   }
 }
+

@@ -4,6 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList } from "react-native-gesture-handler";
 import Icon from "../weatherIcon";
+import Search from "./Search";
 
 export default class Home extends Component {
 
@@ -14,9 +15,16 @@ export default class Home extends Component {
     date: new Date(),
     isLoading: true,
   };
+
+  // BARRE DE RECHERCHE DE VILLE
+  onLocationChange = () => {
+    
+  }
+  ////////////////////////////////////////
+
   async getData() {
     await fetch(
-      "https://api.meteo-concept.com/api/location/city?token=3fe8287448ef08071efabaca2f80941a243f421b369ff39f31e0f1d5671033c3&insee=62041",
+      `https://api.meteo-concept.com/api/location/city?token=3fe8287448ef08071efabaca2f80941a243f421b369ff39f31e0f1d5671033c3&insee=62041`,
       {
         method: "GET",
         headers: {
@@ -70,11 +78,20 @@ export default class Home extends Component {
     return (
       <SafeAreaView>
         <View style={styles.body}>
+          <Search 
+          onLocationChange={this.onLocationChange}
+          />
           <View style={styles.container}>
             <View style={styles.textHead}>
+              <View style={styles.gear}>
+                <Ionicons class={styles.icon} name="settings-outline" size={30} color="black"></Ionicons>
+                <Ionicons name="search-circle-outline" size={30} color="black"></Ionicons></View>
+            </View>
+            <View>
               <Text style={styles.text}>Aure sur mer</Text>
               <Text style={styles.textDate}>Thursday 30 April 2020</Text>
             </View>
+            
             <View style={styles.text}>
               <Text style={styles.today}>Today</Text>
               <View style={styles.middle}>
@@ -161,6 +178,7 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: "#f9f9f9",
   },
+
   container: {
     margin: 20,
   },
@@ -171,7 +189,16 @@ const styles = StyleSheet.create({
   },
   textHead: {
     textAlign: "left",
+
   },
+  gear: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "baseline",
+    justifyContent: "flex-end",
+    margin:2,
+  },
+ 
   text: {
     fontSize: 30,
     fontWeight: "bold",
