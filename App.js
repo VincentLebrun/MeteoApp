@@ -1,35 +1,27 @@
-import React, { Component } from "react";
 import { StatusBar } from "expo-status-bar";
 import Home from "./components/Home";
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import Search from "./components/Search";
 import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import React, { useState } from 'react';
 
-
-const fetchFonts = () => {
-  return Font.loadAsync({
-    'icomoon': require('./fonts/icomoon.ttf')
-  });
-};
-
-let Tab = createBottomTabNavigator();
-export default class App extends Component {
-
-  state = {
-    dataLoaded: false
+const Stack = createStackNavigator();
+const App = () => {
+  const [load,setLoaded]= useState(false)
+  function fetchFonts() {
+    return Font.loadAsync({
+      'icomoon': require('./fonts/icomoon.ttf')
+    });
   }
 
-  render() {
-
-    if (!this.state.dataLoaded) {
+    if (!load) {
       // Chargement de la police icomoon
       return (
         <AppLoading
           startAsync={fetchFonts}
-          onFinish={() => this.setState({ dataLoaded: true })}
+          onFinish={() => setLoaded({ load: true })}
           onError={console.warn}
         />
       )
@@ -38,42 +30,24 @@ export default class App extends Component {
     return (
       <NavigationContainer>
         <StatusBar style="light" />
-
-        <Tab.Navigator
-          screenOptions={({ route }) => ({
-            tabBarIcon: ({ focused, color, size }) => {
-              let iconName;
-              if (route.name === 'Home') {
-                iconName = focused
-                  ? 'home'
-                  : 'home';
-
-              } else if (route.name === 'Search') {
-                iconName = focused ? 'search-circle-outline' : 'search-circle';
-              }
-              return <Ionicons name={iconName} size={size} color={color} />
-            },
-          })}
-          tabBarOptions={{
-            activeTintColor: 'blue',
-            inactiveTintColor: 'green',
-
-          }}
+        <Stack.Navigator
+        screenOptions={{
+         headerShown: false
+        }}     
         >
-          <Tab.Screen
+          <Stack.Screen
             name="Home"
             component={Home}
-
           />
-          <Tab.Screen
+          <Stack.Screen
             name="Search"
             component={Search}
-
           />
-        </Tab.Navigator>
+        </Stack.Navigator>
 
       </NavigationContainer>
     );
   }
-}
+export default App
+
 

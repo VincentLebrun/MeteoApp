@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList } from "react-native-gesture-handler";
 import Icon from "../weatherIcon";
-import Search from "./Search";
+// import Search from "./Search";
 
 export default class Home extends Component {
 
@@ -78,9 +78,9 @@ export default class Home extends Component {
     return (
       <SafeAreaView>
         <View style={styles.body}>
-          <Search 
+          {/* <Search 
           onLocationChange={this.onLocationChange}
-          />
+          /> */}
           <View style={styles.container}>
             <View style={styles.textHead}>
               <View style={styles.gear}>

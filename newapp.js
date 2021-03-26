@@ -34,3 +34,26 @@
 //     );
 //   }
 // }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Icones ionicons ceci est en quelque sorte mon dossier poubelle qui évidemment disparaitra une fois l'app finie. //
+// import Ionicons from 'react-native-vector-icons/Ionicons';                                                     //
+// screenOptions={({ route }) => ({                                                                               //
+//     tabBarIcon: ({ focused, color, size }) => {                                                                //
+//       let iconName;                                                                                            //
+//       if (route.name === 'Home') {                                                                             //
+//         iconName = focused
+//           ? 'home'
+//           : 'home';
+//
+//       } else if (route.name === 'Search') {
+//         iconName = focused ? 'search-circle-outline' : 'search-circle';
+//       }
+//       return <Ionicons name={iconName} size={size} color={color} />
+//     },
+//   })}
+//   tabBarOptions={{
+//     activeTintColor: 'blue',
+//     inactiveTintColor: 'green',
+//
+//   }}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
