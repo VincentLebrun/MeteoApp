@@ -7,8 +7,6 @@ import Icon from "../weatherIcon";
 // import Search from "./Search";
 
 export default class Home extends Component {
-
-
   state = {
     data: [],
     weather: [],
@@ -17,9 +15,7 @@ export default class Home extends Component {
   };
 
   // BARRE DE RECHERCHE DE VILLE
-  onLocationChange = () => {
-    
-  }
+  onLocationChange = () => {};
   ////////////////////////////////////////
 
   async getData() {
@@ -35,7 +31,6 @@ export default class Home extends Component {
     )
       .then((response) => response.json())
       .then((json) => {
-
         this.setState({
           data: json,
         });
@@ -45,20 +40,21 @@ export default class Home extends Component {
   }
 
   async getWeathers() {
-    fetch("https://api.meteo-concept.com/api/forecast/daily?token=3fe8287448ef08071efabaca2f80941a243f421b369ff39f31e0f1d5671033c3&insee=62041"
-      , {
-        method: 'GET',
+    fetch(
+      "https://api.meteo-concept.com/api/forecast/daily?token=3fe8287448ef08071efabaca2f80941a243f421b369ff39f31e0f1d5671033c3&insee=62041",
+      {
+        method: "GET",
         headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
+          Accept: "application/json",
+          "Content-Type": "application/json",
         },
-
-      })
+      }
+    )
       .then((response) => response.json())
       .then((json) => {
         this.setState({
           weather: json,
-          isLoading: false
+          isLoading: false,
         });
       });
   }
@@ -68,11 +64,9 @@ export default class Home extends Component {
   }
 
   render() {
-    const { data, isLoading, date } = this.state;
+    const { weather, data, isLoading, date } = this.state;
     if (isLoading) {
-      return (
-        <Text>Chargement en cours</Text>
-      )
+      return <Text>Chargement en cours</Text>;
     }
 
     return (
@@ -84,14 +78,24 @@ export default class Home extends Component {
           <View style={styles.container}>
             <View style={styles.textHead}>
               <View style={styles.gear}>
-                <Ionicons class={styles.icon} name="settings-outline" size={30} color="black"></Ionicons>
-                <Ionicons name="search-circle-outline" size={30} color="black"></Ionicons></View>
+                <Ionicons
+                  class={styles.icon}
+                  name="settings-outline"
+                  size={30}
+                  color="black"
+                ></Ionicons>
+                <Ionicons
+                  name="search-circle-outline"
+                  size={30}
+                  color="black"
+                ></Ionicons>
+              </View>
             </View>
             <View>
-              <Text style={styles.text}>Aure sur mer</Text>
-              <Text style={styles.textDate}>Thursday 30 April 2020</Text>
+              <Text style={styles.text}>{data.city.name}</Text>
+              <Text style={styles.textDate}>{weather.update}</Text>
             </View>
-            
+
             <View style={styles.text}>
               <Text style={styles.today}>Today</Text>
               <View style={styles.middle}>
@@ -111,16 +115,16 @@ export default class Home extends Component {
             </View>
             <View style={styles.middleHour}>
               <View style={styles.hourDate}>
-                <Text style={styles.hourItem} >06:40</Text>
+                <Text style={styles.hourItem}>06:40</Text>
                 <Text style={styles.textWeather}>Sunrise</Text>
               </View>
               <View style={styles.hourDate}>
-                <Text style={styles.hourItem} >21:20</Text>
+                <Text style={styles.hourItem}>21:20</Text>
                 <Text style={styles.textWeather}>Sunset</Text>
               </View>
 
               <View style={styles.hourDate}>
-                <Text style={styles.hourItem} >14:40</Text>
+                <Text style={styles.hourItem}>14:40</Text>
                 <Text style={styles.textWeather}>Duration Day</Text>
               </View>
             </View>
@@ -129,43 +133,35 @@ export default class Home extends Component {
                 <Text style={styles.textWeather}>THU</Text>
                 <Icon name="wi-day-sunny" size={40} color="black" />
                 <Text style={styles.hourFooter}>16°</Text>
-
               </View>
               <View style={styles.hourDate}>
                 <Text style={styles.textWeather}>FRI</Text>
                 <Icon name="wi-rain-wind" size={40} color="black" />
-                <Text style={styles.hourFooter} >26°</Text>
-
+                <Text style={styles.hourFooter}>26°</Text>
               </View>
 
               <View style={styles.hourDate}>
                 <Text style={styles.textWeather}>SAT</Text>
                 <Icon name="wi-day-rain-wind" size={40} color="black" />
-                <Text style={styles.hourFooter} >23°</Text>
-
-              </View><View style={styles.hourDate}>
+                <Text style={styles.hourFooter}>23°</Text>
+              </View>
+              <View style={styles.hourDate}>
                 <Text style={styles.textWeather}>SUN</Text>
                 <Icon name="wi-day-sprinkle" size={40} color="black" />
-                <Text style={styles.hourFooter} >22°</Text>
-
+                <Text style={styles.hourFooter}>22°</Text>
               </View>
               <View style={styles.hourDate}>
                 <Text style={styles.textWeather}>MON</Text>
                 <Icon name="wi-alien" size={40} color="black" />
-                <Text style={styles.hourFooter} >32°</Text>
-
+                <Text style={styles.hourFooter}>32°</Text>
               </View>
 
               <View style={styles.hourDate}>
                 <Text style={styles.textWeather}>TUE</Text>
                 <Icon name="wi-meteor" size={40} color="black" />
-                <Text style={styles.hourFooter} >23°</Text>
+                <Text style={styles.hourFooter}>23°</Text>
               </View>
-
-
             </View>
-
-
           </View>
         </View>
       </SafeAreaView>
@@ -189,16 +185,15 @@ const styles = StyleSheet.create({
   },
   textHead: {
     textAlign: "left",
-
   },
   gear: {
     flex: 1,
     flexDirection: "row",
     alignItems: "baseline",
     justifyContent: "flex-end",
-    margin:2,
+    margin: 2,
   },
- 
+
   text: {
     fontSize: 30,
     fontWeight: "bold",
@@ -218,14 +213,14 @@ const styles = StyleSheet.create({
     fontSize: 60,
     fontWeight: "bold",
     color: "black",
-    paddingBottom: 10
+    paddingBottom: 10,
   },
   textRain: {
     color: "#7A919D",
     fontWeight: "bold",
     fontSize: 24,
     textAlign: "center",
-    paddingBottom: 30
+    paddingBottom: 30,
   },
   textUnder: {
     fontSize: 20,
@@ -241,8 +236,7 @@ const styles = StyleSheet.create({
   hourItem: {
     fontSize: 30,
     color: "black",
-    fontWeight: "bold"
-
+    fontWeight: "bold",
   },
   middleHour: {
     flexDirection: "row",
@@ -262,6 +256,6 @@ const styles = StyleSheet.create({
     fontSize: 22,
     color: "black",
     fontWeight: "bold",
-    paddingBottom: 60
-  }
+    paddingBottom: 60,
+  },
 });
