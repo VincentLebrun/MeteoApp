@@ -68,6 +68,14 @@ export default class Home extends Component {
     if (isLoading) {
       return <Text>Chargement en cours</Text>;
     }
+    const options = {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    };
+    const myUpdate = new Date(weather.update);
+    const formatedDate = Intl.DateTimeFormat("fr-FR", options).format(myUpdate);
 
     return (
       <SafeAreaView>
@@ -93,7 +101,10 @@ export default class Home extends Component {
             </View>
             <View>
               <Text style={styles.text}>{data.city.name}</Text>
-              <Text style={styles.textDate}>{weather.update}</Text>
+              <Text style={styles.textDate}>
+                {formatedDate.charAt(0).toUpperCase() +
+                  formatedDate.slice(1, formatedDate.length)}
+              </Text>
             </View>
 
             <View style={styles.text}>
