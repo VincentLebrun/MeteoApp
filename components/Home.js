@@ -112,7 +112,7 @@ export default class Home extends Component {
               <View style={styles.middle}>
                 <Icon name="wi-day-sunny" size={80} color="black" />
 
-                <Text style={styles.textT}>13°</Text>
+                <Text style={styles.textT}>{weather.forecast[0].tmax}</Text>
               </View>
             </View>
             <View style={styles.textUnder}>
