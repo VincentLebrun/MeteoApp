@@ -6,6 +6,7 @@ import { FlatList } from "react-native-gesture-handler";
 import Icon from "../weatherIcon";
 import findIcon from "../components/findIcon";
 // import Search from "./Search";
+const Intl = require('react-native-intl');
 
 export default class Home extends Component {
   state = {
