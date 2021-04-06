@@ -5,8 +5,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList } from "react-native-gesture-handler";
 import Icon from "../weatherIcon";
 import findIcon from "../components/findIcon";
+import * as Intl from "react-native-intl";
 // import Search from "./Search";
-const Intl = require('react-native-intl');
+
 
 export default class Home extends Component {
   state = {
@@ -69,7 +70,9 @@ export default class Home extends Component {
     const { weather, data, isLoading, date } = this.state;
     if (isLoading) {
       return <Text>Chargement en cours</Text>;
+      
     }
+    alert(weather.update)
     const options = {
       weekday: "long",
       day: "numeric",
